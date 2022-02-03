@@ -968,4 +968,5 @@ return {
   GetPos = GetPos;
   Respawn = Respawn;
   ModGuns = GunMod;
+  Locations = CFrames;
 }
