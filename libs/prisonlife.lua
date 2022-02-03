@@ -971,4 +971,5 @@ return {
   Respawn = Respawn;
   ModGuns = GunMod;
   Locations = CFrames;
+  Notif = Notification;
 }
