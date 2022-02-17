@@ -944,8 +944,8 @@ function Kill(plr, method)
 		Goto(CFrames["Criminal Base"])
 	end;
 	wait()
-	LPlayer.Character.HumanoidRootPart.CFrame = SavedCF;
-	workspace.Camera.CFrame = SavedCamCF;
+	--LPlayer.Character.HumanoidRootPart.CFrame = SavedCF;
+	--workspace.Camera.CFrame = SavedCamCF;
 	for i, v in pairs(pooTable) do
 		GiveItem(v)
 		repeat
