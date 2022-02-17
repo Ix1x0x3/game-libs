@@ -917,7 +917,7 @@ function Kill(plr, method)
 		workspace.Remote.TeamEvent:FireServer(oldcolor)
 	end;
 	if hadthegun == false then
-		LPlayer.Backpack:FindFirstChild(gun):Destroy()
+		--LPlayer.Backpack:FindFirstChild(gun):Destroy()
 	end;
 	KillQueue[plr.UserId] = nil;
 	TeamEvent("Bright orange")
@@ -937,7 +937,7 @@ function Kill(plr, method)
 	if SavedTeam == "Medium stone grey" then
 		TeamEvent("Bright orange")
 	end;
-	workspace.Remote.loadchar:InvokeServer(nil, BrickColor.new(SavedTeam).Name)
+	workspace.Remote.TeamEvent:FireServer(BrickColor.new(SavedTeam).Name)
 	wait()
 	LPlayer.Character.ForceField:Destroy();
 	if SavedTeam == "Really red" then
