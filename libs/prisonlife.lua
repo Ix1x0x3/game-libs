@@ -966,10 +966,13 @@ end
 return {
   KillPlayer = Kill;
   TeleportPlayerTo = Teleport;
-  GotoCFrame = Goto;
+  Goto = Goto;
   GetPos = GetPos;
   Respawn = Respawn;
   ModGuns = GunMod;
   Locations = CFrames;
   Notif = Notification;
+  GetTeam = GetTeam;
+  LoadChr = LoadChr;
+  GiveItem = GiveItem;
 }
