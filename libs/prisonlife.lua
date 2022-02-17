@@ -973,9 +973,6 @@ function KillArray(plrs, method)
 	local vv = GetTeam();
 	local SwitchedTeams = false;
 	local oldcolor = LPlayer.TeamColor.Name
-	if plr.TeamColor.Name == "Medium stone grey" then
-		workspace.Remote.TeamEvent:FireServer("Bright blue")
-	end;
 	local gun = method or "Remington 870"
 	local hadthegun = true;
 	local gunInstance = LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
