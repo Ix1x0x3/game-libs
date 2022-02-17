@@ -939,7 +939,7 @@ function Kill(plr, method)
 	end;
 	workspace.Remote.TeamEvent:FireServer(BrickColor.new(SavedTeam).Name)
 	wait()
-	LPlayer.Character.ForceField:Destroy();
+	--LPlayer.Character.ForceField:Destroy();
 	if SavedTeam == "Really red" then
 		Goto(CFrames["Criminal Base"])
 	end;
