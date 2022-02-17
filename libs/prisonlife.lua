@@ -992,12 +992,12 @@ function KillArray(plrs, method)
 	repeat wait() until LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
 	for _,plr in pairs(plrs) do
 		if LPlayer.TeamColor.Name == plr.TeamColor.Name then
-		TeamEvent(OppositeTeam(plr.TeamColor.Name));
-		SwitchedTeams = true;
-	end;
+			TeamEvent(OppositeTeam(plr.TeamColor.Name));
+			SwitchedTeams = true;
+		end;
 		if plr.TeamColor.Name == "Medium stone grey" then
-		workspace.Remote.TeamEvent:FireServer("Bright blue")
-	end;
+			workspace.Remote.TeamEvent:FireServer("Bright blue")
+		end;
 	    local args = {
 			[1] = {
 				[1] = {
@@ -1043,7 +1043,7 @@ function KillArray(plrs, method)
 		if hadthegun == false then
 			--LPlayer.Backpack:FindFirstChild(gun):Destroy()
 		end;
-		KillQueue[plr.UserId] = nil;
+		--KillQueue[plr.UserId] = nil;
 	end
 	TeamEvent("Bright orange")
 	for i, v in next, LPlayer.Backpack:GetChildren() do
