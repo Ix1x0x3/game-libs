@@ -875,7 +875,9 @@ function Kill(plr, method)
 		hadthegun = false;
 	end;
 	workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver[gun].ITEMPICKUP)
+	repeat wait() until LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
 	game.ReplicatedStorage.ReloadEvent:FireServer(LPlayer.Backpack[gun] or LPlayer.Character[gun])
+	repeat wait() until LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
 	local args = {
 		[1] = {
 			[1] = {
@@ -911,7 +913,9 @@ function Kill(plr, method)
 		},
 		[2] = LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun)
 	}
+	repeat wait() until LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
 	game.ReplicatedStorage.ShootEvent:FireServer(unpack(args))
+	repeat wait() until LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
 	game.ReplicatedStorage.ShootEvent:FireServer(unpack(args))
 	if SwitchedTeams then
 		workspace.Remote.TeamEvent:FireServer(oldcolor)
@@ -954,13 +958,13 @@ function Kill(plr, method)
 		if pogUsed == v then
 			if LPlayer.Backpack:FindFirstChild(v) then
 				LPlayer.Backpack:FindFirstChild(v).Parent = LPlayer.Character
-			end;
+			end
 		end
 	end
 end
 
 function Punish(Target)
-	Teleport(Target, CFrame.new(9, 9, 9))
+	Teleport(Target, CFrame.new(9e9, 9e9, 9e9))
 end
 
 return {
