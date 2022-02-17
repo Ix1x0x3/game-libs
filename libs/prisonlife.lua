@@ -971,10 +971,6 @@ function KillArray(plrs, method)
 	local SavedCamCF = GetCamPos();
 	local SavedTeam = GetTeam()
 	local vv = GetTeam();
-	--[[if KillQueue[plr.UserId] ~= nil or KillQueue[plr.UserId] == true then
-		return
-	end;]]
-	--[[KillQueue[plr.UserId] = true]]
 	local SwitchedTeams = false;
 	local oldcolor = LPlayer.TeamColor.Name
 	if plr.TeamColor.Name == "Medium stone grey" then
