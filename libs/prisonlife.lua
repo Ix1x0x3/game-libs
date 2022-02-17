@@ -971,16 +971,12 @@ function KillArray(plrs, method)
 	local SavedCamCF = GetCamPos();
 	local SavedTeam = GetTeam()
 	local vv = GetTeam();
-	if KillQueue[plr.UserId] ~= nil or KillQueue[plr.UserId] == true then
+	--[[if KillQueue[plr.UserId] ~= nil or KillQueue[plr.UserId] == true then
 		return
-	end;
-	KillQueue[plr.UserId] = true
+	end;]]
+	--[[KillQueue[plr.UserId] = true]]
 	local SwitchedTeams = false;
 	local oldcolor = LPlayer.TeamColor.Name
-	if LPlayer.TeamColor.Name == plr.TeamColor.Name then
-		TeamEvent(OppositeTeam(plr.TeamColor.Name));
-		SwitchedTeams = true;
-	end;
 	if plr.TeamColor.Name == "Medium stone grey" then
 		workspace.Remote.TeamEvent:FireServer("Bright blue")
 	end;
@@ -995,6 +991,13 @@ function KillArray(plrs, method)
 	game.ReplicatedStorage.ReloadEvent:FireServer(LPlayer.Backpack[gun] or LPlayer.Character[gun])
 	repeat wait() until LPlayer.Backpack:FindFirstChild(gun) or LPlayer.Character:FindFirstChild(gun);
 	for _,plr in pairs(plrs) do
+		if LPlayer.TeamColor.Name == plr.TeamColor.Name then
+		TeamEvent(OppositeTeam(plr.TeamColor.Name));
+		SwitchedTeams = true;
+	end;
+		if plr.TeamColor.Name == "Medium stone grey" then
+		workspace.Remote.TeamEvent:FireServer("Bright blue")
+	end;
 	    local args = {
 			[1] = {
 				[1] = {
