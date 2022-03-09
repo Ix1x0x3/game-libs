@@ -1,4 +1,6 @@
 local KillQueue = {}
+local LPlayer = game.Players.LocalPlayer;
+local stateType = Enum.HumanoidStateType
 
 local CFrames = {
 	["AK-47"] = CFrame.new(-933.276184, 94.1287842, 2056.50757, 0.00427169399, 7.74807063e-08, 0.99999094, -1.15140981e-08, 1, -7.74322473e-08, -0.99999094, -1.11832286e-08, 0.00427169399),
@@ -20,12 +22,57 @@ local CFrames = {
 	["Freeway Hideout"] = CFrame.new(-78.9059448, 11.2191191, 1343.09668, 0.0444511548, 1.49661687e-08, 0.999011576, 8.75487345e-08, 1, -1.88764702e-08, -0.999011576, 8.83012774e-08, 0.0444511548),
 }
 
+local function makeShootPackets(shootPackets, targetPart)
+	for _ = 1, 10 do
+		table.insert(shootPackets, {
+			["RayObject"] = Ray.new(Vector3.zero, Vector3.zero),
+			["Distance"] = 0,
+			["Cframe"] = CFrame.new(),
+			["Hit"] = targetPart
+		})
+	end
+	return shootPackets
+end
+local punch, shoot, reload, itemGive, teamChange, loadChar =
+	repStorage:FindFirstChild("meleeEvent"),
+	repStorage:FindFirstChild("ShootEvent"),
+	repStorage:FindFirstChild("ReloadEvent"),
+	workspace.Remote:FindFirstChild("ItemHandler"),
+	workspace.Remote:FindFirstChild("TeamEvent"),
+	workspace.Remote:FindFirstChild("loadchar")
+local function killPlr(arg1)
+	local gunObj = LPlayer.Backpack:FindFirstChild("M9") or (LPLayer.Character and LPlayer.Character:FindFirstChild("M9"))
+	local shootPackets = table.create(0)
+	if not gunObj then
+		itemGive:InvokeServer(workspace.Prison_ITEMS.giver.M9.ITEMPICKUP)
+		gunObj = player.Backpack:FindFirstChild("M9")
+		humanoid:EquipTool(gunObj)
+		gunObj:FindFirstChild("Handle"):BreakJoints()
+		humanoid:UnequipTools()
+	end
+	if typeof(arg1) == "table" then
+		for _, plr in ipairs(arg1) do
+			local targetPart = plr.Character and plr.Character:FindFirstChild("Head") or nil
+			if not (targetPart) then continue end
+			makeShootPackets(shootPackets, targetPart)
+		end
+	else
+		local targetPart = arg1.Character and arg1.Character:FindFirstChild("Head") or nil
+		if not targetPart then return end
+		makeShootPackets(shootPackets, targetPart)
+	end
+	if not isSelfNeutral() then
+		isKilling = true
+		teamChange:FireServer("Medium stone grey"); isKilling = false
+		task.defer((teamChange.FireServer or autoCrim), teamChange, "Bright orange")
+	end
+	shoot:FireServer(shootPackets, gunObj)
+	reload:FireServer(gunObj)
+end
+
 local Loops = {
 	PlayerChatted = nil
 }
-
-local LPlayer = game.Players.LocalPlayer;
-local stateType = Enum.HumanoidStateType
 
 local character = LPlayer.Character
 local humanoid = character:WaitForChild("Humanoid")
@@ -1082,7 +1129,7 @@ function Punish(Target)
 end
 
 return {
-  KillPlayer = Kill;
+  KillPlayer = killPlr;
   TeleportPlayerTo = Teleport;
   Goto = Goto;
   GetPos = GetPos;
@@ -1093,5 +1140,5 @@ return {
   GetTeam = GetTeam;
   LoadChr = LoadChr;
   GiveItem = GiveItem;
-  KArray = KillArray;
+  KArray = killPlr;
 }
