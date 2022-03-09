@@ -42,11 +42,13 @@ local punch, shoot, reload, itemGive, teamChange, loadChar =
 	workspace.Remote:FindFirstChild("TeamEvent"),
 	workspace.Remote:FindFirstChild("loadchar")
 local function killPlr(arg1)
+	local character = player.Character
+	local humanoid = character:FindFirstChildWhichIsA("Humanoid")
 	local gunObj = LPlayer.Backpack:FindFirstChild("M9") or (LPlayer.Character and LPlayer.Character:FindFirstChild("M9"))
 	local shootPackets = table.create(0)
 	if not gunObj then
 		itemGive:InvokeServer(workspace.Prison_ITEMS.giver.M9.ITEMPICKUP)
-		gunObj = player.Backpack:FindFirstChild("M9")
+		gunObj = LPlayer.Backpack:FindFirstChild("M9")
 		humanoid:EquipTool(gunObj)
 		gunObj:FindFirstChild("Handle"):BreakJoints()
 		humanoid:UnequipTools()
