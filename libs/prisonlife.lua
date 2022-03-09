@@ -1,6 +1,7 @@
 local KillQueue = {}
 local LPlayer = game.Players.LocalPlayer;
 local stateType = Enum.HumanoidStateType
+local repStorage = game:GetService("ReplicatedStorage")
 
 local CFrames = {
 	["AK-47"] = CFrame.new(-933.276184, 94.1287842, 2056.50757, 0.00427169399, 7.74807063e-08, 0.99999094, -1.15140981e-08, 1, -7.74322473e-08, -0.99999094, -1.11832286e-08, 0.00427169399),
